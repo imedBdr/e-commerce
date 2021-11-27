@@ -1,24 +1,22 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
 
-
 @ObjectType()
-export class Administrator{
+export class Administrator {
+  @Field((type) => Int)
+  id: number;
 
-    @Field(type=>Int)
-    id:number;
+  @Field()
+  userName: string;
 
-    @Field()
-    useName:string;
+  @Field()
+  fistName: string;
 
-    @Field()
-    fistName:string;
+  @Field()
+  lastName: string;
 
-    @Field()
-    lastName:string;
+  @Field()
+  password: string;
 
-    @Field()
-    password:string;
-
-    @Field()
-    email:string;
+  @Field()
+  email: string;
 }

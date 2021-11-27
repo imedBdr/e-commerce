@@ -1,5 +1,9 @@
-export class AddAdministratorDto{
-    done: boolean;
-    message :string;
+import { Field, InputType, ObjectType } from "@nestjs/graphql";
 
+@ObjectType()
+export class AddAdministratorDto {
+  @Field()
+  done: boolean;
+  @Field()
+  message: string;
 }

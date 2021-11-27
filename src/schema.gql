@@ -1,0 +1,33 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AddAdministratorDto {
+  done: Boolean!
+  message: String!
+}
+
+type Administrator {
+  email: String!
+  fistName: String!
+  id: Int!
+  lastName: String!
+  password: String!
+  userName: String!
+}
+
+type Mutation {
+  addAdmin(data: SetAdminInput!): AddAdministratorDto!
+}
+
+type Query {
+  administrator(id: Int!): Administrator!
+}
+
+input SetAdminInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  userName: String!
+}
