@@ -2,11 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type AddAdministratorDto {
-  done: Boolean!
-  message: String!
-}
-
 type Administrator {
   email: String!
   fistName: String!
@@ -16,12 +11,20 @@ type Administrator {
   userName: String!
 }
 
+type AdministratorDto {
+  message: String!
+  result: Boolean!
+}
+
 type Mutation {
-  addAdmin(data: SetAdminInput!): AddAdministratorDto!
+  addAdmin(data: SetAdminInput!): AdministratorDto!
+  deleteAdmin(id: Float!): AdministratorDto!
+  updateAdmin(data: UpdateAdminInput!): AdministratorDto!
 }
 
 type Query {
   administrator(id: Int!): Administrator!
+  admins: [Administrator!]!
 }
 
 input SetAdminInput {
@@ -30,4 +33,9 @@ input SetAdminInput {
   lastName: String!
   password: String!
   userName: String!
+}
+
+input UpdateAdminInput {
+  firstName: String!
+  lastName: String!
 }

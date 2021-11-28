@@ -19,8 +19,8 @@ export class AdministratorService {
     const { result, message } = await this.CheckIfexists({ ...body });
     if (result) {
       await this.administratorRepository.save(body);
-      return { message: "Administrator is added", done: true };
-    } else return { done: false, message };
+      return { message: "Administrator is added", result: true };
+    } else return { result: false, message };
   }
 
   async GetAdmins() {
