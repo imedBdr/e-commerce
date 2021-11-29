@@ -2,20 +2,10 @@ import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { AdministratorModule } from "./administrator/administrator.module";
 import { GraphQLModule } from "@nestjs/graphql";
 import { join } from "path";
-import { AdministratorEntity } from "./administrator/administrator.entity";
-import { ClientModule } from "./client/client.module";
-import { CategoryModule } from "./category/category.module";
-import { ItemModule } from "./item/item.module";
-import { ItemDetailsModule } from "./item-details/item-details.module";
-import { CartModule } from "./cart/cart.module";
-import { CartDetailsModule } from "./cart-details/cart-details.module";
-import { BillModule } from "./bill/bill.module";
-import { BillDetailsModule } from "./bill-details/bill-details.module";
-import { LocationModule } from './location/location.module';
-import { AuthModule } from './auth/auth.module';
+import Entities from "./entities";
+import Modules from "./modules";
 
 @Module({
   imports: [
@@ -26,7 +16,7 @@ import { AuthModule } from './auth/auth.module';
       username: "root",
       password: "chawkidak",
       database: "e-commerce",
-      entities: [AdministratorEntity],
+      entities: [...Entities],
       synchronize: false,
       migrations: ["migration/*.ts"],
       cli: {
@@ -34,23 +24,13 @@ import { AuthModule } from './auth/auth.module';
       },
     }),
     GraphQLModule.forRoot({
-      include: [AdministratorModule],
+      include: [...Modules],
       autoSchemaFile: join(process.cwd(), "src/schema.gql"),
       sortSchema: true,
       debug: false,
       playground: true,
     }),
-    AdministratorModule,
-    ClientModule,
-    CategoryModule,
-    ItemModule,
-    ItemDetailsModule,
-    CartModule,
-    CartDetailsModule,
-    BillModule,
-    BillDetailsModule,
-    LocationModule,
-    AuthModule,
+    ...Modules,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,7 +1,11 @@
 import { Field, ObjectType } from "@nestjs/graphql";
+import { BillEntity } from "src/bill/bill.entity";
+import { CartEntity } from "src/cart/cart.entity";
+import { LocationEntity } from "src/location/location.Entity";
 import {
   Column,
   Entity,
+  JoinColumn,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
