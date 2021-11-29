@@ -6,6 +6,16 @@ import { AdministratorModule } from "./administrator/administrator.module";
 import { GraphQLModule } from "@nestjs/graphql";
 import { join } from "path";
 import { AdministratorEntity } from "./administrator/administrator.entity";
+import { ClientModule } from "./client/client.module";
+import { CategoryModule } from "./category/category.module";
+import { ItemModule } from "./item/item.module";
+import { ItemDetailsModule } from "./item-details/item-details.module";
+import { CartModule } from "./cart/cart.module";
+import { CartDetailsModule } from "./cart-details/cart-details.module";
+import { BillModule } from "./bill/bill.module";
+import { BillDetailsModule } from "./bill-details/bill-details.module";
+import { LocationModule } from './location/location.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -13,8 +23,8 @@ import { AdministratorEntity } from "./administrator/administrator.entity";
       type: "mysql",
       host: "localhost",
       port: 3306,
-      username: "test",
-      password: "test",
+      username: "root",
+      password: "chawkidak",
       database: "e-commerce",
       entities: [AdministratorEntity],
       synchronize: false,
@@ -31,6 +41,16 @@ import { AdministratorEntity } from "./administrator/administrator.entity";
       playground: true,
     }),
     AdministratorModule,
+    ClientModule,
+    CategoryModule,
+    ItemModule,
+    ItemDetailsModule,
+    CartModule,
+    CartDetailsModule,
+    BillModule,
+    BillDetailsModule,
+    LocationModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -18,7 +18,7 @@ type AdministratorDto {
 
 type Mutation {
   addAdmin(data: SetAdminInput!): AdministratorDto!
-  deleteAdmin(id: Float!): AdministratorDto!
+  deleteAdmin(data: Float!): AdministratorDto!
   updateAdmin(data: UpdateAdminInput!): AdministratorDto!
 }
 

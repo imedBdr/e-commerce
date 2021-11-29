@@ -23,6 +23,10 @@ export class AdministratorService {
     } else return { result: false, message };
   }
 
+  async findForValidation(userName: string) {
+    return await this.administratorRepository.findOne({ userName });
+  }
+
   async GetAdmins() {
     const arr = await this.administratorRepository.find();
     return arr?.map((e) => {
