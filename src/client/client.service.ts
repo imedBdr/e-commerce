@@ -5,9 +5,12 @@ import { Repository } from "typeorm";
 import { ClientEntity } from "./client.entity";
 import { ClientDto } from "./dto/client.dto";
 import { AddClientInterface } from "./interfaces/add-client.interface";
-
+import { ChangeClientPassword } from "./interfaces/password-client.interface";
+import { UpdateClientInterface } from "./interfaces/update-client.interface";
+import * as bcrypt from 'bcrypt';
 @Injectable()
 export class ClientService {
+
   constructor(
     @InjectRepository(ClientEntity)
     private readonly clientRepository: Repository<ClientEntity>
@@ -31,7 +34,7 @@ export class ClientService {
 
         client.cart = cart;
         client.email = body.email;
-        client.password = body.password;
+        client.password = await bcrypt.hash(body.password,10);
         client.firstName = body.firstName;
         client.lastName = body.lastName;
         client.userName = body.userName;
@@ -52,7 +55,7 @@ export class ClientService {
         result: false,
         message: err,
       };
-    }
+    } 
   }
 
   async delete(id: number): Promise<ClientDto> {
@@ -67,4 +70,28 @@ export class ClientService {
       message: `Can't delete client`,
     };
   }
+
+  async update(body:UpdateClientInterface):Promise<ClientDto>{
+    try{
+      const res  = await this.clientRepository.update(body.id, body)
+      if(res.affected>0)
+        return{result:true,message:''}
+      return{result:false,message:''}
+    }
+    catch(err){
+      return{result:false,message:err}}
+  }
+
+  async changePassword(body:ChangeClientPassword):Promise<ClientDto>{
+    try{
+      const password = await bcrypt.hash(body.password,10)
+      const res  = await this.clientRepository.update(body.id, {password})
+      if(res.affected>0)
+        return{result:true,message:''}
+      return{result:false,message:''}
+    }
+    catch(err){
+      return{result:false,message:err}}
+  }
 }
+
