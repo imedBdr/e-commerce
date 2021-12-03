@@ -4,7 +4,7 @@ import { ClientDto } from "./dto/client.dto";
 import { AddClientInput } from "./inputs/add-client.iinput";
 import { ChangeClientPasswordInput } from "./inputs/change-client-password.input";
 import { UpdateClientInput } from "./inputs/update-client.input";
-import { ClientModel } from "./models/client.model";
+import { ClientModel } from "./model/client.model";
 
 @Resolver(() => ClientModel)
 export class AdministratorResolver {

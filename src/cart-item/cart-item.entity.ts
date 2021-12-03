@@ -28,9 +28,6 @@ export class CartItemEntity {
   @Field()
   created_at: number;
 
-  @Column()
-  modified_at: number;
-
   @ManyToOne(() => CartEntity)
   @JoinColumn({ name: "id", referencedColumnName: "id" })
   @Field()

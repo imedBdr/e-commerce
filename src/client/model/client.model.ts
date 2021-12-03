@@ -1,7 +1,7 @@
 import { Field, ObjectType } from "@nestjs/graphql";
-import { BillEntity } from "src/bill/bill.entity";
-import { CartEntity } from "src/cart/cart.entity";
-import { LocationEntity } from "src/location/location.Entity";
+import { BillModel } from "src/bill/model/bill.model";
+import { CartModel } from "src/cart/model/cart.model";
+import { LocationModel } from "src/location/model/location.model";
 
 @ObjectType()
 export class ClientModel {
@@ -27,11 +27,11 @@ export class ClientModel {
   phone: string;
 
   @Field()
-  location: LocationEntity;
+  location: LocationModel;
 
   @Field()
-  cart: CartEntity;
+  cart: CartModel;
 
   @Field()
-  bills: BillEntity[];
+  bills: BillModel[];
 }

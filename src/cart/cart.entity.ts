@@ -1,6 +1,5 @@
 import { Field, ObjectType } from "@nestjs/graphql";
 import { CartItemEntity } from "src/cart-item/cart-item.entity";
-import { CartItemService } from "src/cart-item/cart-item.service";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("cart")

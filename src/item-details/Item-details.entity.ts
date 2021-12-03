@@ -42,5 +42,6 @@ export class ItemDetailsEntity {
 
   @ManyToOne(() => ItemEntity)
   @JoinColumn({ name: "id", referencedColumnName: "id" })
+  @Field()
   item: ItemEntity;
 }
