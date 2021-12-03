@@ -7,10 +7,9 @@ import { ClientDto } from "./dto/client.dto";
 import { AddClientInterface } from "./interfaces/add-client.interface";
 import { ChangeClientPassword } from "./interfaces/password-client.interface";
 import { UpdateClientInterface } from "./interfaces/update-client.interface";
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from "bcrypt";
 @Injectable()
 export class ClientService {
-
   constructor(
     @InjectRepository(ClientEntity)
     private readonly clientRepository: Repository<ClientEntity>
@@ -24,7 +23,15 @@ export class ClientService {
     return await this.clientRepository.findOne({ email });
   }
 
-  async add(body: AddClientInterface): Promise<ClientDto> {
+  async findById(id: number) {
+    return await this.clientRepository.findOne({ id });
+  }
+
+  async find() {
+    return await this.clientRepository.find();
+  }
+
+  async Add(body: AddClientInterface): Promise<ClientDto> {
     try {
       const byUser = await this.findForValidation(body.userName);
       const byEmail = await this.findByEmail(body.email);
@@ -34,7 +41,7 @@ export class ClientService {
 
         client.cart = cart;
         client.email = body.email;
-        client.password = await bcrypt.hash(body.password,10);
+        client.password = await bcrypt.hash(body.password, 10);
         client.firstName = body.firstName;
         client.lastName = body.lastName;
         client.userName = body.userName;
@@ -55,7 +62,7 @@ export class ClientService {
         result: false,
         message: err,
       };
-    } 
+    }
   }
 
   async delete(id: number): Promise<ClientDto> {
@@ -71,27 +78,24 @@ export class ClientService {
     };
   }
 
-  async update(body:UpdateClientInterface):Promise<ClientDto>{
-    try{
-      const res  = await this.clientRepository.update(body.id, body)
-      if(res.affected>0)
-        return{result:true,message:''}
-      return{result:false,message:''}
+  async update(body: UpdateClientInterface): Promise<ClientDto> {
+    try {
+      const res = await this.clientRepository.update(body.id, body);
+      if (res.affected > 0) return { result: true, message: "" };
+      return { result: false, message: "" };
+    } catch (err) {
+      return { result: false, message: err };
     }
-    catch(err){
-      return{result:false,message:err}}
   }
 
-  async changePassword(body:ChangeClientPassword):Promise<ClientDto>{
-    try{
-      const password = await bcrypt.hash(body.password,10)
-      const res  = await this.clientRepository.update(body.id, {password})
-      if(res.affected>0)
-        return{result:true,message:''}
-      return{result:false,message:''}
+  async changePassword(body: ChangeClientPassword): Promise<ClientDto> {
+    try {
+      const password = await bcrypt.hash(body.password, 10);
+      const res = await this.clientRepository.update(body.id, { password });
+      if (res.affected > 0) return { result: true, message: "" };
+      return { result: false, message: "" };
+    } catch (err) {
+      return { result: false, message: err };
     }
-    catch(err){
-      return{result:false,message:err}}
   }
 }
-

@@ -1,7 +1,5 @@
+export interface ChangeClientPassword {
+  id: number;
 
-
-export interface ChangeClientPassword{
-    id:number;
-
-    password:string;
+  password: string;
 }
