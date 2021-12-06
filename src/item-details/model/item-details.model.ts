@@ -20,9 +20,9 @@ export class ItemDetailsModel {
   @Field()
   created_at: number;
 
-  @Field()
+  @Field(() => [CartItemModel])
   cartItems: CartItemModel[];
 
-  @Field()
+  @Field(() => ItemModel)
   item: ItemModel;
 }

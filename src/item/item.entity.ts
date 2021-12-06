@@ -27,10 +27,10 @@ export class ItemEntity {
 
   @ManyToOne(() => CategoryEntity)
   @JoinColumn({ name: "id", referencedColumnName: "id" })
-  @Field()
+  @Field(() => CategoryEntity)
   category: CategoryEntity;
 
   @OneToMany(() => ItemDetailsEntity, (itemDetail) => itemDetail.item)
-  @Field()
+  @Field(() => ItemDetailsEntity)
   itemDetails: ItemDetailsEntity[];
 }

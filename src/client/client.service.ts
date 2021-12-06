@@ -37,17 +37,18 @@ export class ClientService {
       const byEmail = await this.findByEmail(body.email);
       if (!byUser && !byEmail) {
         const client = new ClientEntity();
-        const cart = new CartEntity();
+        //const cart = new CartEntity();
 
-        client.cart = cart;
+        //client.cart = cart;
         client.email = body.email;
         client.password = await bcrypt.hash(body.password, 10);
         client.firstName = body.firstName;
         client.lastName = body.lastName;
         client.userName = body.userName;
+        client.phone = body.phone;
 
-        const res = await this.clientRepository.insert(client);
-        if (res.raw.insertedId)
+        const res = await this.clientRepository.save(client);
+        if (res)
           return {
             result: true,
             message: "",

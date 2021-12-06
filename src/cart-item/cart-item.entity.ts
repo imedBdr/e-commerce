@@ -29,12 +29,12 @@ export class CartItemEntity {
   created_at: number;
 
   @ManyToOne(() => CartEntity)
-  @JoinColumn({ name: "id", referencedColumnName: "id" })
-  @Field()
+  @JoinColumn({ name: "cart_id", referencedColumnName: "id" })
+  @Field(() => CartEntity)
   cart: CartEntity;
 
   @ManyToOne(() => ItemDetailsEntity)
   @JoinColumn({ name: "id", referencedColumnName: "id" })
-  @Field()
+  @Field(() => ItemDetailsEntity)
   itemDetails: ItemDetailsEntity;
 }

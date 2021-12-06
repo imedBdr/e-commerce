@@ -17,7 +17,7 @@ import Modules from "./modules";
       password: "chawkidak",
       database: "e-commerce",
       entities: [...Entities],
-      synchronize: false,
+      synchronize: true,
       migrations: ["migration/*.ts"],
       cli: {
         migrationsDir: "migration",

@@ -13,9 +13,9 @@ export class ItemModel {
   @Field()
   created_at: number;
 
-  @Field()
+  @Field(() => CategoryModel)
   category: CategoryModel;
 
-  @Field()
+  @Field(() => [ItemDetailsModel])
   itemDetails: ItemDetailsModel[];
 }

@@ -34,7 +34,7 @@ export class ItemDetailsEntity {
   created_at: number;
 
   @OneToMany(() => CartItemEntity, (cartItem) => cartItem.itemDetails)
-  @Field()
+  @Field(() => CartItemEntity)
   cartItems: CartItemEntity[];
 
   //   @OneToMany(() => DiscountEntity, (discount) => discount.productInventory)
@@ -42,6 +42,6 @@ export class ItemDetailsEntity {
 
   @ManyToOne(() => ItemEntity)
   @JoinColumn({ name: "id", referencedColumnName: "id" })
-  @Field()
+  @Field(() => ItemEntity)
   item: ItemEntity;
 }

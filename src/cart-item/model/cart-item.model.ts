@@ -16,9 +16,9 @@ export class CartItemModel {
   @Field()
   created_at: number;
 
-  @Field()
+  @Field(() => CartModel)
   cart: CartModel;
 
-  @Field()
+  @Field(() => ItemDetailsModel)
   itemDetails: ItemDetailsModel;
 }

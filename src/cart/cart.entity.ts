@@ -18,6 +18,6 @@ export class CartEntity {
   created_at: number;
 
   @OneToMany(() => CartItemEntity, (cartItem) => cartItem.cart)
-  @Field()
+  @Field(() => [CartItemEntity])
   cartItems: CartItemEntity[];
 }

@@ -38,18 +38,21 @@ export class ClientEntity {
   @Field()
   password: string;
 
-  @Column()
+  @Column({ default: "" })
   @Field()
   phone: string;
 
-  @OneToOne(() => LocationEntity)
+  @OneToMany(() => LocationEntity, (location) => location.client)
   @JoinColumn()
-  location: LocationEntity;
+  @Field(() => [LocationEntity])
+  locations: LocationEntity[];
 
   @OneToOne(() => CartEntity)
-  @JoinColumn()
+  @JoinColumn({ name: "id", referencedColumnName: "id" })
+  @Field(() => CartEntity)
   cart: CartEntity;
 
   @OneToMany(() => BillEntity, (bill) => bill.client)
+  @Field(() => [BillEntity])
   bills: BillEntity[];
 }

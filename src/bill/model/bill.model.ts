@@ -13,9 +13,9 @@ export class BillModel {
   @Field()
   created_at: number;
 
-  @Field()
+  @Field(() => [BillItemModel])
   billItems: BillItemModel[];
 
-  @Field()
+  @Field(() => ClientModel)
   client: ClientModel;
 }

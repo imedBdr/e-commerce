@@ -12,6 +12,9 @@ export class AddClientInput {
   lastName: string;
 
   @Field()
+  phone: string;
+
+  @Field()
   password: string;
 
   @Field()

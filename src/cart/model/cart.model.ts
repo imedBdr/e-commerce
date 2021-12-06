@@ -12,6 +12,6 @@ export class CartModel {
   @Field()
   created_at: number;
 
-  @Field()
+  @Field(() => [CartItemModel])
   cartItems: CartItemModel[];
 }

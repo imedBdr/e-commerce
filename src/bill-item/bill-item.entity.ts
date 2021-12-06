@@ -25,12 +25,12 @@ export class BillItemEntity {
   quantity: number;
 
   @ManyToOne(() => BillEntity)
-  @JoinColumn({ name: "id", referencedColumnName: "id" })
-  @Field()
+  @JoinColumn({ name: "bill_id", referencedColumnName: "id" })
+  @Field(() => BillEntity)
   bill: BillEntity;
 
   @ManyToOne(() => ItemEntity)
   @JoinColumn({ name: "id", referencedColumnName: "id" })
-  @Field()
+  @Field(() => ItemEntity)
   item: ItemEntity;
 }

@@ -22,6 +22,6 @@ export class CategoryEntity {
   picture: string;
 
   @OneToMany(() => ItemEntity, (item) => item.category)
-  @Field()
-  items: ItemEntity[];
+  @Field(() => ItemEntity)
+  item: ItemEntity[];
 }

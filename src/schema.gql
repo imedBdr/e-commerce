@@ -2,6 +2,15 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input AddClientInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  phone: String!
+  userName: String!
+}
+
 type Administrator {
   email: String!
   fistName: String!
@@ -16,15 +25,186 @@ type AdministratorDto {
   result: Boolean!
 }
 
+type BillEntity {
+  billItems: [BillItemEntity!]!
+  created_at: Float!
+  id: Float!
+  total: Float!
+}
+
+type BillItemEntity {
+  bill: BillEntity!
+  id: Float!
+  item: ItemEntity!
+  price: Float!
+  quantity: Float!
+}
+
+type BillItemModel {
+  bill: BillModel!
+  id: Float!
+  item: ItemModel!
+  price: Float!
+  quantity: Float!
+}
+
+type BillModel {
+  billItems: [BillItemModel!]!
+  client: ClientModel!
+  created_at: Float!
+  id: Float!
+  total: Float!
+}
+
+type CartEntity {
+  cartItems: [CartItemEntity!]!
+  created_at: Float!
+  id: Float!
+  total: Float!
+}
+
+type CartItemEntity {
+  cart: CartEntity!
+  created_at: Float!
+  id: Float!
+  itemDetails: ItemDetailsEntity!
+  price: Float!
+  quantity: Float!
+}
+
+type CartItemModel {
+  cart: CartModel!
+  created_at: Float!
+  id: Float!
+  itemDetails: ItemDetailsModel!
+  price: Float!
+  quantity: Float!
+}
+
+type CartModel {
+  cartItems: [CartItemModel!]!
+  created_at: Float!
+  id: Float!
+  total: Float!
+}
+
+type CategoryEntity {
+  description: String!
+  id: Float!
+  item: ItemEntity!
+  name: String!
+  picture: String!
+}
+
+type CategoryModel {
+  description: String!
+  id: Float!
+  item: ItemModel!
+  name: String!
+  picture: String!
+}
+
+input ChangeClientPasswordInput {
+  password: String!
+}
+
+type ClientDto {
+  message: String!
+  result: Boolean!
+}
+
+type ClientEntity {
+  bills: [BillEntity!]!
+  cart: CartEntity!
+  email: String!
+  firstName: String!
+  id: Float!
+  lastName: String!
+  locations: [LocationEntity!]!
+  password: String!
+  phone: String!
+  userName: String!
+}
+
+type ClientModel {
+  bills: [BillModel!]!
+  cart: CartModel!
+  email: String!
+  firstName: String!
+  id: Float!
+  lastName: String!
+  location: LocationModel!
+  password: String!
+  phone: String!
+  userName: String!
+}
+
+type ItemDetailsEntity {
+  buy_price: Float!
+  cartItems: CartItemEntity!
+  created_at: Float!
+  id: Float!
+  item: ItemEntity!
+  quantity: Float!
+  sell_price: Float!
+}
+
+type ItemDetailsModel {
+  buy_price: Float!
+  cartItems: [CartItemModel!]!
+  created_at: Float!
+  id: Float!
+  item: ItemModel!
+  quantity: Float!
+  sell_price: Float!
+}
+
+type ItemEntity {
+  category: CategoryEntity!
+  created_at: Float!
+  id: Float!
+  itemDetails: ItemDetailsEntity!
+  name: String!
+}
+
+type ItemModel {
+  category: CategoryModel!
+  created_at: Float!
+  id: Float!
+  itemDetails: [ItemDetailsModel!]!
+  name: String!
+}
+
+type LocationEntity {
+  address: String!
+  client: ClientEntity!
+  id: Float!
+  latitude: String!
+  longitude: String!
+}
+
+type LocationModel {
+  address: String!
+  id: Float!
+  latitude: String!
+  longitude: String!
+}
+
 type Mutation {
   addAdmin(data: SetAdminInput!): AdministratorDto!
+  addClient(data: AddClientInput!): ClientDto!
+  changePassword(data: ChangeClientPasswordInput!): ClientDto!
   deleteAdmin(data: Float!): AdministratorDto!
+  deleteClient(data: Float!): ClientDto!
   updateAdmin(data: UpdateAdminInput!): AdministratorDto!
+  updateClient(data: UpdateClientInput!): ClientDto!
 }
 
 type Query {
   administrator(id: Int!): Administrator!
   admins: [Administrator!]!
+  client(id: Int!): ClientModel!
+  clients: [ClientModel!]!
 }
 
 input SetAdminInput {
@@ -36,6 +216,11 @@ input SetAdminInput {
 }
 
 input UpdateAdminInput {
+  firstName: String!
+  lastName: String!
+}
+
+input UpdateClientInput {
   firstName: String!
   lastName: String!
 }

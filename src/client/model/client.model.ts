@@ -26,12 +26,12 @@ export class ClientModel {
   @Field()
   phone: string;
 
-  @Field()
+  @Field(() => LocationModel)
   location: LocationModel;
 
-  @Field()
+  @Field(() => CartModel)
   cart: CartModel;
 
-  @Field()
+  @Field(() => [BillModel])
   bills: BillModel[];
 }

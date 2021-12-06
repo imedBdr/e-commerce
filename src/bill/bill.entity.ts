@@ -21,10 +21,11 @@ export class BillEntity {
   total: number;
 
   @Column()
+  @Field()
   created_at: number;
 
   @OneToMany((type) => BillItemEntity, (billItem) => billItem.bill)
-  @Field()
+  @Field(() => [BillItemEntity])
   billItems: BillItemEntity[];
 
   @ManyToOne(() => ClientEntity, (client) => client.bills)

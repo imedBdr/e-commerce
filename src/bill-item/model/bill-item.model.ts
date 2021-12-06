@@ -13,9 +13,9 @@ export class BillItemModel {
   @Field()
   quantity: number;
 
-  @Field()
+  @Field(() => BillModel)
   bill: BillModel;
 
-  @Field()
+  @Field(() => ItemModel)
   item: ItemModel;
 }

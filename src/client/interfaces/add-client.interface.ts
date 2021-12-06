@@ -8,4 +8,6 @@ export interface AddClientInterface {
   password: string;
 
   email: string;
+
+  phone: string;
 }

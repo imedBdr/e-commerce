@@ -1,4 +1,12 @@
-import { Args, Int, Mutation, Query, Resolver } from "@nestjs/graphql";
+import {
+  Args,
+  Int,
+  Mutation,
+  Query,
+  ResolveField,
+  Resolver,
+} from "@nestjs/graphql";
+import { LocationService } from "src/location/location.service";
 import { ClientService } from "./client.service";
 import { ClientDto } from "./dto/client.dto";
 import { AddClientInput } from "./inputs/add-client.iinput";
@@ -7,8 +15,11 @@ import { UpdateClientInput } from "./inputs/update-client.input";
 import { ClientModel } from "./model/client.model";
 
 @Resolver(() => ClientModel)
-export class AdministratorResolver {
-  constructor(private readonly clientService: ClientService) {}
+export class ClientResolver {
+  constructor(
+    private readonly clientService: ClientService,
+    private readonly locationService: LocationService
+  ) {}
 
   @Query(() => ClientModel, { name: "client" })
   async getClient(@Args("id", { type: () => Int }) id: number) {
@@ -22,6 +33,7 @@ export class AdministratorResolver {
 
   @Mutation(() => ClientDto, { name: "addClient" })
   async addClient(@Args("data") body: AddClientInput): Promise<ClientDto> {
+    console.log(body);
     return await this.clientService.Add(body);
   }
 

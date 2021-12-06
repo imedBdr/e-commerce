@@ -15,6 +15,6 @@ export class CategoryModel {
   @Field()
   picture: string;
 
-  @Field()
-  items: ItemModel[];
+  @Field(() => ItemModel)
+  item: ItemModel[];
 }
