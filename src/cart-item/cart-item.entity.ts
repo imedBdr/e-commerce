@@ -24,7 +24,7 @@ export class CartItemEntity {
   @Field()
   price: number;
 
-  @Column()
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   @Field()
   created_at: number;
 
@@ -34,7 +34,7 @@ export class CartItemEntity {
   cart: CartEntity;
 
   @ManyToOne(() => ItemDetailsEntity)
-  @JoinColumn({ name: "id", referencedColumnName: "id" })
+  @JoinColumn({ name: "itemDetails_id", referencedColumnName: "id" })
   @Field(() => ItemDetailsEntity)
   itemDetails: ItemDetailsEntity;
 }

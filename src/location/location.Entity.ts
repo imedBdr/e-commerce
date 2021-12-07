@@ -1,6 +1,12 @@
 import { Field, ObjectType } from "@nestjs/graphql";
 import { ClientEntity } from "src/client/client.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity("location")
 @ObjectType()
@@ -21,7 +27,12 @@ export class LocationEntity {
   @Field()
   latitude: string;
 
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+  @Field()
+  created_at: number;
+
   @ManyToOne(() => ClientEntity)
+  @JoinColumn({ name: "client_id", referencedColumnName: "id" }) //
   @Field(() => ClientEntity)
   client: ClientEntity;
 }

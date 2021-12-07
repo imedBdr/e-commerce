@@ -13,7 +13,7 @@ export class CartEntity {
   @Field()
   total: number;
 
-  @Column()
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   @Field()
   created_at: number;
 

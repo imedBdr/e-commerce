@@ -1,11 +1,4 @@
-import {
-  Args,
-  Int,
-  Mutation,
-  Query,
-  ResolveField,
-  Resolver,
-} from "@nestjs/graphql";
+import { Args, Int, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { LocationService } from "src/location/location.service";
 import { ClientService } from "./client.service";
 import { ClientDto } from "./dto/client.dto";

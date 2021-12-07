@@ -8,11 +8,13 @@ import { AddClientInterface } from "./interfaces/add-client.interface";
 import { ChangeClientPassword } from "./interfaces/password-client.interface";
 import { UpdateClientInterface } from "./interfaces/update-client.interface";
 import * as bcrypt from "bcrypt";
+import { CartService } from "src/cart/cart.service";
 @Injectable()
 export class ClientService {
   constructor(
     @InjectRepository(ClientEntity)
-    private readonly clientRepository: Repository<ClientEntity>
+    private readonly clientRepository: Repository<ClientEntity>,
+    private readonly cartService: CartService
   ) {}
 
   async findForValidation(userName: string) {
@@ -24,7 +26,10 @@ export class ClientService {
   }
 
   async findById(id: number) {
-    return await this.clientRepository.findOne({ id });
+    return await this.clientRepository.findOne(
+      { id },
+      { relations: ["cart", "locations", "bills"] }
+    );
   }
 
   async find() {
@@ -36,10 +41,12 @@ export class ClientService {
       const byUser = await this.findForValidation(body.userName);
       const byEmail = await this.findByEmail(body.email);
       if (!byUser && !byEmail) {
+        const cartId = await this.cartService.CreateCart();
         const client = new ClientEntity();
-        //const cart = new CartEntity();
+        const cart = new CartEntity();
 
-        //client.cart = cart;
+        cart.id = cartId;
+        client.cart = cart;
         client.email = body.email;
         client.password = await bcrypt.hash(body.password, 10);
         client.firstName = body.firstName;
@@ -47,7 +54,7 @@ export class ClientService {
         client.userName = body.userName;
         client.phone = body.phone;
 
-        const res = await this.clientRepository.save(client);
+        const res = await this.clientRepository.insert(client);
         if (res)
           return {
             result: true,
@@ -56,7 +63,7 @@ export class ClientService {
       }
       return {
         result: false,
-        message: "",
+        message: "Client alredy exists",
       };
     } catch (err) {
       return {

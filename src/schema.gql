@@ -2,6 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input AddCategoryInput {
+  description: String!
+  name: String!
+}
+
 input AddClientInput {
   email: String!
   firstName: String!
@@ -88,18 +93,24 @@ type CartModel {
   total: Float!
 }
 
+type CategoryDto {
+  message: String!
+  result: Boolean!
+}
+
 type CategoryEntity {
+  created_at: Float!
   description: String!
   id: Float!
-  item: ItemEntity!
+  items: [ItemEntity!]!
   name: String!
   picture: String!
 }
 
 type CategoryModel {
   description: String!
-  id: Float!
-  item: ItemModel!
+  id: Float
+  items: [ItemModel!]!
   name: String!
   picture: String!
 }
@@ -116,6 +127,7 @@ type ClientDto {
 type ClientEntity {
   bills: [BillEntity!]!
   cart: CartEntity!
+  created_at: Float!
   email: String!
   firstName: String!
   id: Float!
@@ -129,6 +141,7 @@ type ClientEntity {
 type ClientModel {
   bills: [BillModel!]!
   cart: CartModel!
+  created_at: Float!
   email: String!
   firstName: String!
   id: Float!
@@ -178,6 +191,7 @@ type ItemModel {
 type LocationEntity {
   address: String!
   client: ClientEntity!
+  created_at: Float!
   id: Float!
   latitude: String!
   longitude: String!
@@ -192,17 +206,22 @@ type LocationModel {
 
 type Mutation {
   addAdmin(data: SetAdminInput!): AdministratorDto!
+  addCategory(data: AddCategoryInput!): CategoryDto!
   addClient(data: AddClientInput!): ClientDto!
   changePassword(data: ChangeClientPasswordInput!): ClientDto!
   deleteAdmin(data: Float!): AdministratorDto!
+  deleteCategory(id: Float!): CategoryDto!
   deleteClient(data: Float!): ClientDto!
   updateAdmin(data: UpdateAdminInput!): AdministratorDto!
+  updateCategory(data: UpdateCategoryInput!): CategoryDto!
   updateClient(data: UpdateClientInput!): ClientDto!
 }
 
 type Query {
   administrator(id: Int!): Administrator!
   admins: [Administrator!]!
+  categories: [CategoryModel!]!
+  category(id: Int!): CategoryModel!
   client(id: Int!): ClientModel!
   clients: [ClientModel!]!
 }
@@ -218,6 +237,12 @@ input SetAdminInput {
 input UpdateAdminInput {
   firstName: String!
   lastName: String!
+}
+
+input UpdateCategoryInput {
+  description: String!
+  id: Float!
+  name: String!
 }
 
 input UpdateClientInput {

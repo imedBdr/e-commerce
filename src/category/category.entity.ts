@@ -17,11 +17,15 @@ export class CategoryEntity {
   @Field()
   description: string;
 
-  @Column()
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+  @Field()
+  created_at: number;
+
+  @Column({ default: "" })
   @Field()
   picture: string;
 
-  @OneToMany(() => ItemEntity, (item) => item.category)
-  @Field(() => ItemEntity)
-  item: ItemEntity[];
+  @OneToMany(() => ItemEntity, (items) => items.category)
+  @Field(() => [ItemEntity])
+  items: ItemEntity[];
 }

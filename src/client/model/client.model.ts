@@ -26,6 +26,9 @@ export class ClientModel {
   @Field()
   phone: string;
 
+  @Field()
+  created_at: number;
+
   @Field(() => LocationModel)
   location: LocationModel;
 

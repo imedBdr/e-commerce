@@ -3,7 +3,7 @@ import { ItemModel } from "src/item/model/item.model";
 
 @ObjectType()
 export class CategoryModel {
-  @Field()
+  @Field({ nullable: true })
   id: number;
 
   @Field()
@@ -15,6 +15,6 @@ export class CategoryModel {
   @Field()
   picture: string;
 
-  @Field(() => ItemModel)
-  item: ItemModel[];
+  @Field(() => [ItemModel])
+  items: ItemModel[];
 }

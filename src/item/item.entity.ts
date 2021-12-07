@@ -21,12 +21,12 @@ export class ItemEntity {
   @Field()
   name: string;
 
-  @Column()
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   @Field()
   created_at: number;
 
   @ManyToOne(() => CategoryEntity)
-  @JoinColumn({ name: "id", referencedColumnName: "id" })
+  @JoinColumn({ name: "category_id", referencedColumnName: "id" })
   @Field(() => CategoryEntity)
   category: CategoryEntity;
 

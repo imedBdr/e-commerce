@@ -42,13 +42,17 @@ export class ClientEntity {
   @Field()
   phone: string;
 
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+  @Field()
+  created_at: number;
+
   @OneToMany(() => LocationEntity, (location) => location.client)
   @JoinColumn()
   @Field(() => [LocationEntity])
   locations: LocationEntity[];
 
   @OneToOne(() => CartEntity)
-  @JoinColumn({ name: "id", referencedColumnName: "id" })
+  @JoinColumn({ name: "cart_id", referencedColumnName: "id" })
   @Field(() => CartEntity)
   cart: CartEntity;
 

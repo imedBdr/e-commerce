@@ -29,7 +29,7 @@ export class ItemDetailsEntity {
   @Field()
   sell_price: number;
 
-  @Column()
+  @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   @Field()
   created_at: number;
 
@@ -41,7 +41,7 @@ export class ItemDetailsEntity {
   //   discounts: DiscountEntity[];
 
   @ManyToOne(() => ItemEntity)
-  @JoinColumn({ name: "id", referencedColumnName: "id" })
+  @JoinColumn({ name: "item_id", referencedColumnName: "id" })
   @Field(() => ItemEntity)
   item: ItemEntity;
 }

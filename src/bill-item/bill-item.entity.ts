@@ -30,7 +30,7 @@ export class BillItemEntity {
   bill: BillEntity;
 
   @ManyToOne(() => ItemEntity)
-  @JoinColumn({ name: "id", referencedColumnName: "id" })
+  @JoinColumn({ name: "item_id", referencedColumnName: "id" })
   @Field(() => ItemEntity)
   item: ItemEntity;
 }
