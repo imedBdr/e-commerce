@@ -51,7 +51,7 @@ export class CategoryService {
 
   async update(body: UpdateCategoryInterface): Promise<CategoryDto> {
     try {
-      const res = await this.categoryRepository.update(body.id, body);
+      const res = await this.categoryRepository.update(body.id, { ...body });
       if (res.affected > 0)
         return { result: true, message: "Category is updated" };
       return { result: false, message: "Category is not Updated" };

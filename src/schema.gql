@@ -240,9 +240,9 @@ input UpdateAdminInput {
 }
 
 input UpdateCategoryInput {
-  description: String!
+  description: String
   id: Float!
-  name: String!
+  name: String
 }
 
 input UpdateClientInput {

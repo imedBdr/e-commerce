@@ -5,9 +5,9 @@ export default class UpdateCategoryInput {
   @Field()
   id: number;
 
-  @Field()
+  @Field({ nullable: true })
   name!: string;
 
-  @Field()
+  @Field({ nullable: true })
   description: string;
 }
