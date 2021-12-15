@@ -16,6 +16,13 @@ input AddClientInput {
   userName: String!
 }
 
+input AddLocationInput {
+  address: String!
+  clientId: Float!
+  latitude: String!
+  longitude: String!
+}
+
 type Administrator {
   email: String!
   fistName: String!
@@ -146,7 +153,7 @@ type ClientModel {
   firstName: String!
   id: Float!
   lastName: String!
-  location: LocationModel!
+  location: LocationModel
   password: String!
   phone: String!
   userName: String!
@@ -188,6 +195,11 @@ type ItemModel {
   name: String!
 }
 
+type LocationDto {
+  message: String!
+  result: Boolean!
+}
+
 type LocationEntity {
   address: String!
   client: ClientEntity!
@@ -198,7 +210,7 @@ type LocationEntity {
 }
 
 type LocationModel {
-  address: String!
+  address: String
   id: Float!
   latitude: String!
   longitude: String!
@@ -208,13 +220,16 @@ type Mutation {
   addAdmin(data: SetAdminInput!): AdministratorDto!
   addCategory(data: AddCategoryInput!): CategoryDto!
   addClient(data: AddClientInput!): ClientDto!
+  addLocation(data: AddLocationInput!): LocationDto!
   changePassword(data: ChangeClientPasswordInput!): ClientDto!
   deleteAdmin(data: Float!): AdministratorDto!
   deleteCategory(id: Float!): CategoryDto!
   deleteClient(data: Float!): ClientDto!
+  deleteLocation(id: Int!): LocationDto!
   updateAdmin(data: UpdateAdminInput!): AdministratorDto!
   updateCategory(data: UpdateCategoryInput!): CategoryDto!
   updateClient(data: UpdateClientInput!): ClientDto!
+  updateLocation(data: UpdateLocationInput!): LocationDto!
 }
 
 type Query {
@@ -224,6 +239,7 @@ type Query {
   category(id: Int!): CategoryModel!
   client(id: Int!): ClientModel!
   clients: [ClientModel!]!
+  locaion(id: Float!): LocationModel!
 }
 
 input SetAdminInput {
@@ -248,4 +264,11 @@ input UpdateCategoryInput {
 input UpdateClientInput {
   firstName: String!
   lastName: String!
+}
+
+input UpdateLocationInput {
+  address: String!
+  id: Float!
+  latitude: String!
+  longitude: String!
 }

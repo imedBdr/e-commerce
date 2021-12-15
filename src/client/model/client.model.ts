@@ -29,7 +29,7 @@ export class ClientModel {
   @Field()
   created_at: number;
 
-  @Field(() => LocationModel)
+  @Field(() => LocationModel, { nullable: true })
   location: LocationModel;
 
   @Field(() => CartModel)

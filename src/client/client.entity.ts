@@ -47,7 +47,6 @@ export class ClientEntity {
   created_at: number;
 
   @OneToMany(() => LocationEntity, (location) => location.client)
-  @JoinColumn()
   @Field(() => [LocationEntity])
   locations: LocationEntity[];
 

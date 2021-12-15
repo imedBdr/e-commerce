@@ -1,11 +1,11 @@
-import { Field, ObjectType } from "@nestjs/graphql";
+import { Field, Int, ObjectType } from "@nestjs/graphql";
 
 @ObjectType()
 export class LocationModel {
   @Field()
   id: number;
 
-  @Field()
+  @Field({ nullable: true })
   address: string;
 
   @Field()
