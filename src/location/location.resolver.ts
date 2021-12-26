@@ -29,7 +29,9 @@ export class LocationResolver {
   // Add guard
   @Mutation(() => LocationDto, { name: "deleteLocation" })
   async deleteLocation(@Args("id", { type: () => Int }) id: number) {
-    return await this.locationService.delete(id);
+    //get client ID from guard
+    const data = { id: id, clientId: 1 };
+    return await this.locationService.delete(data);
   }
 
   // Add guard

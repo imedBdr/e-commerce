@@ -153,7 +153,7 @@ type ClientModel {
   firstName: String!
   id: Float!
   lastName: String!
-  location: LocationModel
+  locations: [LocationModel!]
   password: String!
   phone: String!
   userName: String!

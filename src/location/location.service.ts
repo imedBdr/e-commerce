@@ -4,6 +4,7 @@ import { ClientEntity } from "src/client/client.entity";
 import { Repository } from "typeorm";
 import { LocationDto } from "./dto/location.dto";
 import { AddLocationInterafce } from "./interface/add-location.interface";
+import { DeleteLocationInterface } from "./interface/delete-location.interface";
 import { FindLocationInterface } from "./interface/find-location.interface";
 import { UpdateLocationInterface } from "./interface/update-location.interface";
 import { LocationEntity } from "./location.Entity";
@@ -48,16 +49,19 @@ export class LocationService {
 
   async find(body: FindLocationInterface): Promise<LocationEntity> {
     const clientId = await this.getClientId(body.id);
-    //if (clientId === body.clientId)
-    return await this.locationRepository.findOne({ id: body.id });
+    if (clientId === body.clientId)
+      return await this.locationRepository.findOne({ id: body.id });
   }
 
-  async delete(id: number): Promise<LocationDto> {
+  async delete(body: DeleteLocationInterface): Promise<LocationDto> {
     try {
-      const res = await this.locationRepository.delete({ id });
-      if (res.affected > 0)
-        return { result: true, message: "Location is deleted" };
-      return { result: false, message: "Location is not deleted" };
+      const clientId = await this.getClientId(body.id);
+      if (clientId === body.clientId) {
+        const res = await this.locationRepository.delete({ id: body.id });
+        if (res.affected > 0)
+          return { result: true, message: "Location is deleted" };
+        return { result: false, message: "Location is not deleted" };
+      }
     } catch (err) {
       return {
         result: false,

@@ -21,6 +21,10 @@ export class ItemEntity {
   @Field()
   name: string;
 
+  @Column()
+  @Field()
+  description: string;
+
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   @Field()
   created_at: number;

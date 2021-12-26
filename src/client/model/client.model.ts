@@ -29,8 +29,8 @@ export class ClientModel {
   @Field()
   created_at: number;
 
-  @Field(() => LocationModel, { nullable: true })
-  location: LocationModel;
+  @Field(() => [LocationModel], { nullable: true })
+  locations: LocationModel[];
 
   @Field(() => CartModel)
   cart: CartModel;

@@ -11,6 +11,9 @@ export class ItemModel {
   name: string;
 
   @Field()
+  description: string;
+
+  @Field()
   created_at: number;
 
   @Field(() => CategoryModel)
