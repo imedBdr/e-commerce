@@ -1,7 +1,9 @@
 export interface UpdateItemInterface {
-  name: string;
+  id: number;
 
-  description: string;
+  name?: string;
 
-  categoryId: number;
+  description?: string;
+
+  categoryId?: number;
 }

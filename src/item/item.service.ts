@@ -58,6 +58,20 @@ export class ItemService {
 
   async Update(data: UpdateItemInterface): Promise<ItemDto> {
     try {
+      const res = await this.itemRepository.update(
+        { id: data.id },
+        { ...data }
+      );
+      if (res.affected > 0)
+        return {
+          result: true,
+          message: "Item is updated",
+        };
+
+      return {
+        result: false,
+        message: "Item is not updated",
+      };
     } catch (err) {
       throw new HttpException(
         {
@@ -67,5 +81,19 @@ export class ItemService {
         500
       );
     }
+  }
+
+  async Delete(id: number): Promise<ItemDto> {
+    const res = await this.itemRepository.delete(id);
+    if (res.affected > 0)
+      return {
+        result: true,
+        message: "Item is deleted",
+      };
+
+    return {
+      result: false,
+      message: "Item is not deleted",
+    };
   }
 }
